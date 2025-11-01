@@ -17,4 +17,17 @@ body,
 body {
   font-family: var(--font-sans);
   background: #f8fafc;
+  transition: background-color 0.3s ease;
+}
+
+/* Dark mode transitions */
+.dark body {
+  background: #1a1a1a;
+}
+
+/* Smooth theme transition for all elements */
+* {
+  transition-property: background-color, border-color, color, fill, stroke;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 0.3s;
 }

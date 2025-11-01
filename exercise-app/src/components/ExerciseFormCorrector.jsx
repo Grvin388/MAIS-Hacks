@@ -1,5 +1,6 @@
 import React, { useState, useRef } from "react";
 import axios from "axios";
+import ThemeToggle from "./ThemeToggle";
 
 const ExerciseFormCorrector = () => {
   const [videoFile, setVideoFile] = useState(null);
@@ -86,27 +87,28 @@ const ExerciseFormCorrector = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50 py-8 px-4 sm:px-6 lg:px-8 transition-all duration-500">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50 dark:from-gray-900 dark:to-gray-800 py-8 px-4 sm:px-6 lg:px-8 transition-all duration-500">
+      <ThemeToggle />
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-12 transform hover:scale-105 transition-transform duration-300">
-          <h1 className="text-4xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-2 animate-fade-in">
+          <h1 className="text-4xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400 bg-clip-text text-transparent mb-2 animate-fade-in">
             AI Exercise Form Corrector
           </h1>
-          <p className="text-lg text-gray-600 hover:text-blue-600 transition-colors duration-300">
+          <p className="text-lg text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-300">
             Upload your exercise video and get instant feedback on your form
           </p>
         </div>
 
-        <div className="bg-white/80 backdrop-blur-sm rounded-xl shadow-lg p-6 mb-8 hover:shadow-xl transition-all duration-300 border border-blue-100">
+        <div className="bg-white/80 dark:bg-gray-800/90 backdrop-blur-sm rounded-xl shadow-lg p-6 mb-8 hover:shadow-xl transition-all duration-300 border border-blue-100 dark:border-gray-700">
           {/* Exercise Selection */}
           <div className="mb-6">
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">
               Select Exercise Type
             </label>
             <select
               value={exerciseType}
               onChange={(e) => setExerciseType(e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
               {exercises.map((exercise) => (
                 <option key={exercise.value} value={exercise.value}>
