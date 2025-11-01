@@ -1,0 +1,12 @@
+/* Basic styles. If you use Tailwind, replace this with the Tailwind directives. */
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+}
+body {
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial;
+  background: #f8fafc;
+}
