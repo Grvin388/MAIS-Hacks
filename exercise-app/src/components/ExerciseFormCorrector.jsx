@@ -91,10 +91,10 @@ const ExerciseFormCorrector = () => {
       <ThemeToggle />
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-12 transform hover:scale-105 transition-transform duration-300">
-          <h1 className="text-4xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400 bg-clip-text text-transparent mb-2 animate-fade-in">
+          <h1 className="text-4xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 dark:from-amber-300 dark:to-yellow-400 bg-clip-text text-transparent mb-2 animate-fade-in">
             AI Exercise Form Corrector
           </h1>
-          <p className="text-lg text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-300">
+          <p className="text-lg text-gray-600 dark:text-amber-200 hover:text-blue-600 dark:hover:text-amber-300 transition-colors duration-300">
             Upload your exercise video and get instant feedback on your form
           </p>
         </div>
@@ -133,7 +133,7 @@ const ExerciseFormCorrector = () => {
               />
               <label
                 htmlFor="video-upload"
-                className="cursor-pointer bg-gradient-to-r from-blue-500 to-purple-500 text-white px-6 py-3 rounded-lg hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 font-medium"
+                className="cursor-pointer bg-gradient-to-r from-blue-500 to-purple-500 dark:from-amber-400 dark:to-yellow-500 text-white px-6 py-3 rounded-lg hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 font-medium"
               >
                 Choose Video File
               </label>
@@ -142,6 +142,9 @@ const ExerciseFormCorrector = () => {
                   Selected: {videoFile.name}
                 </p>
               )}
+              <p className="mt-4 text-sm text-amber-600 dark:text-amber-400 italic">
+                💡 Tip: For accurate results, film at a 45-degree angle to the front of the person exercising
+              </p>
             </div>
           </div>
 
