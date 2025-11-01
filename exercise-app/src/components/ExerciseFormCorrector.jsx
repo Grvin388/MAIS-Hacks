@@ -234,7 +234,7 @@ const ExerciseFormCorrector = () => {
                       <div
                         key={index}
                         className={`border-l-4 p-4 rounded ${getSeverityColor(
-                          correrection.severity
+                          correction.severity
                         )}`}
                       >
                         <div className="flex justify-between items-start mb-1">
