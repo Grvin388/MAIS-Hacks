@@ -1,9 +1,10 @@
 import ExerciseFormCorrector from "./components/ExerciseFormCorrector";
+import ErrorBoundary from "./components/ErrorBoundary";
 
 export default function App() {
   return (
-    <div>
+    <ErrorBoundary>
       <ExerciseFormCorrector />
-    </div>
+    </ErrorBoundary>
   );
 }
