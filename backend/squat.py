@@ -75,9 +75,9 @@ def analyze_squat_video(video_path, max_frames=600, stride=3):
     max_dorsi = float(np.percentile(ankle_dorsi, 90))
 
     # --- scoring heuristics ---
-    depth_score = 95 if min_knee <= 95 else 85 if min_knee <= 110 else 70 if min_knee <= 125 else 50
-    torso_score = 95 if avg_torso <= 15 else 80 if avg_torso <= 25 else 65 if avg_torso <= 35 else 50
-    track_score = 95 if max_valg <= 0.15 else 80 if max_valg <= 0.25 else 65 if max_valg <= 0.35 else 50
+    depth_score = 95 if min_knee <= 80 else 85 if min_knee <= 90 else 70 if min_knee <= 100 else 50
+    torso_score = 95 if avg_torso >= 175 else 80 if avg_torso >= 170 else 65 if avg_torso >= 165 else 50
+    track_score = 95 if max_valg >= 0.95 else 80 if max_valg >= 0.90 else 65 if max_valg >= 0.85 else 50
     ankle_score = 95 if max_dorsi >= 30 else 80 if max_dorsi >= 20 else 65 if max_dorsi >= 15 else 50
 
     detailed = {

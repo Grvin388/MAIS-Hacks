@@ -160,15 +160,15 @@ def analyze_lunge_video(video_path: str, max_frames: int = 600, stride: int = 3)
     else:                       depth_score = 50
 
     # Shin vs vertical: <=15° great; 15–25 ok; 25–35 warn; >35 poor
-    if med_shin <= 15:        shin_score = 95
-    elif med_shin <= 25:      shin_score = 80
-    elif med_shin <= 35:      shin_score = 65
+    if med_shin >= 169:        shin_score = 95
+    elif med_shin >= 164:      shin_score = 80
+    elif med_shin >= 160:      shin_score = 65
     else:                     shin_score = 50
 
     # Torso vs vertical: <=15° great; 15–25 ok; 25–35 warn; >35 poor
-    if med_torso <= 15:       torso_score = 95
-    elif med_torso <= 25:     torso_score = 80
-    elif med_torso <= 35:     torso_score = 65
+    if med_torso >= 175:       torso_score = 95
+    elif med_torso >= 170:     torso_score = 80
+    elif med_torso >= 165:     torso_score = 65
     else:                     torso_score = 50
 
     # Knee tracking deviation (normalized): <=0.15 great; <=0.25 ok; <=0.35 warn; >0.35 poor
