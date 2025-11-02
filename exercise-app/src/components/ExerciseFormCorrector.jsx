@@ -42,7 +42,7 @@ const ExerciseFormCorrector = () => {
     setIsDragging(false);
 
     const file = e.dataTransfer.files[0];
-    if (file && file.type.startsWith('video/')) {
+    if (file && file.type.startsWith("video/")) {
       setVideoFile(file);
       // Clean up previous object URL
       if (videoUrlRef.current) {
@@ -57,7 +57,7 @@ const ExerciseFormCorrector = () => {
       }
       // Reset file input so same file can be selected again
       if (fileInputRef.current) {
-        fileInputRef.current.value = '';
+        fileInputRef.current.value = "";
       }
     }
   };
@@ -79,7 +79,7 @@ const ExerciseFormCorrector = () => {
       }
       // Reset file input so same file can be selected again
       if (fileInputRef.current) {
-        fileInputRef.current.value = '';
+        fileInputRef.current.value = "";
       }
     }
   };
@@ -170,7 +170,7 @@ const ExerciseFormCorrector = () => {
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-12 transform hover:scale-105 transition-transform duration-300">
           <h1 className="text-4xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 dark:from-amber-300 dark:to-yellow-400 bg-clip-text text-transparent mb-2 animate-fade-in">
-            AI Exercise Form Corrector
+            KinetikAI
           </h1>
           <p className="text-lg text-gray-600 dark:text-amber-200 hover:text-blue-600 dark:hover:text-amber-300 transition-colors duration-300">
             Upload your exercise video and get instant feedback on your form
@@ -201,11 +201,11 @@ const ExerciseFormCorrector = () => {
             <label className="block text-sm font-medium text-gray-700 mb-2">
               Upload Exercise Video
             </label>
-            <div 
+            <div
               className={`border-2 border-dashed rounded-lg p-6 text-center transition-all duration-200 ${
-                isDragging 
-                  ? 'border-amber-400 bg-amber-50/50 dark:bg-amber-500/10' 
-                  : 'border-gray-300'
+                isDragging
+                  ? "border-amber-400 bg-amber-50/50 dark:bg-amber-500/10"
+                  : "border-gray-300"
               }`}
               onDragOver={handleDragOver}
               onDragEnter={handleDragEnter}
