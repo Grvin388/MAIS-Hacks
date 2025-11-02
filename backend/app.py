@@ -1,3 +1,4 @@
+# app.py
 import os
 import tempfile
 from flask import Flask, request, jsonify
@@ -5,6 +6,7 @@ from flask_cors import CORS
 
 from squat import analyze_squat_video
 from pushup import analyze_pushup_video
+from lunge import analyze_lunge_video   # ⬅️ add this
 
 app = Flask(__name__)
 CORS(app, resources={r"/api/*": {"origins": "*"}})
@@ -30,12 +32,15 @@ def analyze():
         tmp_path = tmp.name
 
     try:
+        # Simple dispatcher
         if exercise_type == "squat":
             result = analyze_squat_video(tmp_path)
         elif exercise_type == "pushup":
             result = analyze_pushup_video(tmp_path)
+        elif exercise_type == "lunge":                     # ⬅️ add this
+            result = analyze_lunge_video(tmp_path)
         else:
-            result = {"error": f"Exercise '{exercise_type}' not supported. Try 'squat' or 'pushup'."}
+            result = {"error": f"Exercise '{exercise_type}' not supported. Try 'squat', 'pushup', or 'lunge'."}
 
         status = 200 if "error" not in result else 400
         return jsonify(result), status
