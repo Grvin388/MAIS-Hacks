@@ -8,7 +8,10 @@ const ExerciseFormCorrector = () => {
   const [analysis, setAnalysis] = useState(null);
   const [loading, setLoading] = useState(false);
   const [uploadProgress, setUploadProgress] = useState(0);
+  const [isDragging, setIsDragging] = useState(false);
   const videoRef = useRef(null);
+  const fileInputRef = useRef(null);
+  const videoUrlRef = useRef(null); // To store and clean up object URLs
 
   const exercises = [
     { value: "squat", label: "Squat" },
@@ -18,14 +21,67 @@ const ExerciseFormCorrector = () => {
     { value: "shoulder_press", label: "Shoulder Press" },
   ];
 
+  const handleDragEnter = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragging(true);
+  };
+
+  const handleDragLeave = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragging(false);
+  };
+
+  const handleDragOver = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+  };
+
+  const handleDrop = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragging(false);
+
+    const file = e.dataTransfer.files[0];
+    if (file && file.type.startsWith('video/')) {
+      setVideoFile(file);
+      // Clean up previous object URL
+      if (videoUrlRef.current) {
+        URL.revokeObjectURL(videoUrlRef.current);
+      }
+      // Create new preview URL
+      const videoUrl = URL.createObjectURL(file);
+      videoUrlRef.current = videoUrl;
+      if (videoRef.current) {
+        videoRef.current.src = videoUrl;
+        videoRef.current.load();
+      }
+      // Reset file input so same file can be selected again
+      if (fileInputRef.current) {
+        fileInputRef.current.value = '';
+      }
+    }
+  };
+
   const handleFileSelect = (event) => {
     const file = event.target.files[0];
     if (file) {
       setVideoFile(file);
-      // Create preview URL
+      // Clean up previous object URL
+      if (videoUrlRef.current) {
+        URL.revokeObjectURL(videoUrlRef.current);
+      }
+      // Create new preview URL
       const videoUrl = URL.createObjectURL(file);
+      videoUrlRef.current = videoUrl;
       if (videoRef.current) {
         videoRef.current.src = videoUrl;
+        videoRef.current.load();
+      }
+      // Reset file input so same file can be selected again
+      if (fileInputRef.current) {
+        fileInputRef.current.value = '';
       }
     }
   };
@@ -86,6 +142,30 @@ const ExerciseFormCorrector = () => {
     }
   };
 
+  // Clean up object URL on unmount
+  React.useEffect(() => {
+    return () => {
+      if (videoUrlRef.current) {
+        URL.revokeObjectURL(videoUrlRef.current);
+      }
+    };
+  }, []);
+
+  React.useEffect(() => {
+    if (videoFile) {
+      // Clean up previous object URL
+      if (videoUrlRef.current) {
+        URL.revokeObjectURL(videoUrlRef.current);
+      }
+      const videoUrl = URL.createObjectURL(videoFile);
+      videoUrlRef.current = videoUrl;
+      if (videoRef.current) {
+        videoRef.current.src = videoUrl;
+        videoRef.current.load();
+      }
+    }
+  }, [videoFile]);
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50 dark:from-gray-900 dark:to-gray-800 py-8 px-4 sm:px-6 lg:px-8 transition-all duration-500">
       <ThemeToggle />
@@ -123,13 +203,24 @@ const ExerciseFormCorrector = () => {
             <label className="block text-sm font-medium text-gray-700 mb-2">
               Upload Exercise Video
             </label>
-            <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center">
+            <div 
+              className={`border-2 border-dashed rounded-lg p-6 text-center transition-all duration-200 ${
+                isDragging 
+                  ? 'border-amber-400 bg-amber-50/50 dark:bg-amber-500/10' 
+                  : 'border-gray-300'
+              }`}
+              onDragOver={handleDragOver}
+              onDragEnter={handleDragEnter}
+              onDragLeave={handleDragLeave}
+              onDrop={handleDrop}
+            >
               <input
                 type="file"
                 accept="video/*"
                 onChange={handleFileSelect}
                 className="hidden"
                 id="video-upload"
+                ref={fileInputRef}
               />
               <label
                 htmlFor="video-upload"
